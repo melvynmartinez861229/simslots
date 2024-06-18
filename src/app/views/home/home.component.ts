@@ -26,6 +26,8 @@ export class HomeComponent {
 
   matrixBuffer:number[][] = [];
 
+  historical:IResult[] = [];
+
   constructor(){
     GameSlots.initialize();
   }
@@ -40,5 +42,6 @@ export class HomeComponent {
     let result: IResult = GameSlots.play(data);
     console.log(result);
     this.matrixBuffer = result.matrix;
+    this.historical.push(result);
   }
 }

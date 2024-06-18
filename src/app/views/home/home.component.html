@@ -21,25 +21,25 @@
           <tbody>
 
             @if (matrixBuffer !== []) {
-              <tr>
-                <th>1</th>
+            <tr>
+              <th>1</th>
 
-                @for (item of matrixBuffer[0]; track $index) {
-                  <td>Figura {{item}}</td>
-                }
-              </tr>
-              <tr>
-                <th>2</th>
-                @for (item of matrixBuffer[1]; track $index) {
-                  <td>Figura {{item}}</td>
-                }
-              </tr>
-              <tr>
-                <th>3</th>
-                @for (item of matrixBuffer[2]; track $index) {
-                  <td>Figura {{item}}</td>
-                }
-              </tr>
+              @for (item of matrixBuffer[0]; track $index) {
+              <td>Figura {{item}}</td>
+              }
+            </tr>
+            <tr>
+              <th>2</th>
+              @for (item of matrixBuffer[1]; track $index) {
+              <td>Figura {{item}}</td>
+              }
+            </tr>
+            <tr>
+              <th>3</th>
+              @for (item of matrixBuffer[2]; track $index) {
+              <td>Figura {{item}}</td>
+              }
+            </tr>
             }
 
           </tbody>
@@ -134,6 +134,10 @@
           </tr>
         </thead>
         <tbody>
+          @if (historical.length > 0) {
+            <tr>
+              <th>{{historical[historical.length-1].rtp}}</th>
+            </tr>
           <!--
           <tr>
             <th>{{_RTP.value}}</th>
@@ -162,6 +166,7 @@
             </td>
           </tr>
           -->
+          }
         </tbody>
       </table>
     </div>
