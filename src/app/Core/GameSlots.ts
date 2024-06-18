@@ -60,10 +60,12 @@ export class GameSlots {
   public static initialize() {
     this.balance = this.initialBalance;
   }
+  static getRandomNumber(min: number, max: number): number {
+    return Math.floor(Math.random() * (max - min + 1)) + min;
+  }
 
   /** Jugar */
   public static play(/** datos de la Spin*/ dataSpin: ISpin): IResult {
-    console.log(dataSpin);
     /** contador de Spin */
     this.counter++;
 
@@ -101,7 +103,7 @@ export class GameSlots {
 
     //resultado del DADO
     let isWin = this.generateWinOrLose();
-
+   // console.log(GameSlots.withholdings)
     // si la retencion es mayor que la apuesta devolver una parte
     if (dataSpin.bet < GameSlots.withholdings) {
       result.gameLog.withholdings = 'La apuesta es menor a la recepción. Se puede devolver en base el RTP.'
@@ -110,22 +112,23 @@ export class GameSlots {
     }
 
     //calculo de retencion
-    let withholdingsResult = dataSpin.bet * GameSlots.rtp;
+    let withholdingsResult = GameSlots.withholdings * dataSpin.rtp;
     //si gana:
     //si pierde: (la retencion sera del % respecto al RTP)
-
-
-    if(GameSlots.withholdings > 10){
+    //HEchale un ojo aca
+    const withholdingsToWin = GameSlots.getRandomNumber(10, dataSpin.bet * 10);
+    console.log("Ramdom: " ,withholdingsToWin)
+    console.log("Before:  "+ GameSlots.withholdings)
+    if (isWin || GameSlots.withholdings > withholdingsToWin) {
+     // console.log(`Bet: ${dataSpin.bet} Rtp: ${dataSpin.rtp} total: ${withholdingsResult}`)
       let theMatrix:winResult = Matrix.getWinnerMatrix(dataSpin.lines,withholdingsResult,dataSpin.bet);
+      GameSlots.withholdings -=  theMatrix.info.profit;
+      console.log("After:  "+ GameSlots.withholdings)
       console.table(theMatrix.matrix);
-    }
-
-
-    if (isWin) {
     } else {
       //Calcular el saldo en Base al RTP (retorno al jugador).
       withholdingsResult = dataSpin.bet * dataSpin.rtp;
-      console.log(">>>>>   "+withholdingsResult);
+      //console.log(">>>>>   "+withholdingsResult);
       GameSlots.withholdings += withholdingsResult;
       //enviar la diferencia al saldo del juego.
       GameSlots.balance += dataSpin.bet - withholdingsResult;
@@ -156,6 +159,7 @@ export class GameSlots {
     }
     return matrix;
   }
+
 
   static SetGameLogStatus(type: string): GameLog {
 

@@ -35,8 +35,6 @@ export class HomeComponent {
       rtp: this.rtp / 100,
       volatility: this.volatility / 100,
     };
-
     let result: IResult = GameSlots.play(data);
-    console.log(result);
   }
 }

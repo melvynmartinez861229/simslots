@@ -182,13 +182,17 @@ Devolver el arreglo de matrices: Finalmente, se devuelve el arreglo matrixes que
     estimatedProfit: number,
     bet: number
   ) => {
+    console.log("Tamo aqui")
+    console.log("estimatedProfit: ",estimatedProfit)
+    console.log("lines: ", lines)
+    console.log("bet: ", bet)
     while (true) {
       const matrix = this.generateMatrixes(1)[0];
       const result = this.validateMatrix(matrix, lines);
-      if (result == null) continue;
-
       const limiteInferior = estimatedProfit * 0.6;
       const limiteSuperior = estimatedProfit * 1.4;
+      if (result == null) continue;
+
       const profit = result.multiplier * bet;
 
       if (!(profit >= limiteInferior && profit <= limiteSuperior)) continue;
@@ -202,7 +206,7 @@ Devolver el arreglo de matrices: Finalmente, se devuelve el arreglo matrixes que
       const winResult:winResult = {
         matrix: matrix,
         info: {
-          profit: 0,
+          profit,
           lines: result.lines,
           multiplier: result.multiplier
         }
