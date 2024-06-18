@@ -44,10 +44,20 @@
 
           </tbody>
         </table>
-        @if (historical[historical.length-1].winLines !== undefined) {
-          <p>WindLines:{{historical[historical.length-1].winLines?.length}}</p>
-        }
       </div>
+
+      @if (historical[historical.length-1].winLines !== undefined) {
+        @for (item of historical[historical.length-1].winLines; track $index) {
+          <div class="flex">
+            <p>Count: {{item.Count}}</p>
+            <span class="pl-4"></span>
+            <p>LineID: {{item.LineID}}</p>
+            <span class="pl-4"></span>
+            <p>Number: {{item.Number}}</p>
+          </div>
+        }
+      }
+
     </div>
     <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
 

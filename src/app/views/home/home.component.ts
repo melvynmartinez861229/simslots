@@ -43,5 +43,6 @@ export class HomeComponent {
     console.log(result);
     this.matrixBuffer = result.matrix;
     this.historical.push(result);
+
   }
 }
