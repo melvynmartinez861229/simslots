@@ -28,6 +28,8 @@ export class HomeComponent {
 
   historical:IResult[] = [];
 
+  playerBalance:number = 0;
+
   constructor(){
     GameSlots.initialize();
   }
@@ -43,6 +45,12 @@ export class HomeComponent {
     console.log(result);
     this.matrixBuffer = result.matrix;
     this.historical.push(result);
+    if (result.win > 0) {
+      this.playerBalance += result.win;
+    }else
+    {
+      this.playerBalance -= data.bet;
+    }
 
   }
 }
