@@ -1,0 +1,46 @@
+  /*
+  constructor() {
+    this.balanceGame = this.initialBalanceGame;
+    this.historical = [];
+  }
+
+
+  matrix:number[][] = Matrix.getLoserMatrix(1);
+  resultMatrix!:LineResult;
+
+  //opciones de seleccion de linea [1..21]
+  linesOption: number[] = [...Array(22).keys()].slice(1);
+  //opciones de apuestas []
+  bets: number[] = [4, 8, 20, 40, 80, 200, 400, 800, 1600, 3200];
+
+  volatility: number = 95;
+  rtp: number = 97;
+
+  //banca
+  initialBalanceGame: number = 1000;
+  balanceGame: number = 0;
+  bankstatus: string = '';
+
+  _Bank:iBank = {
+    initialBalance: 0,
+    balance: 0,
+    status: '',
+  }
+
+  _RTP:iRTP = {
+    value: 0,
+    win: 0,
+    lost: 0,
+    winp: 0,
+    lostp: 0,
+    total: 0,
+  }
+  /*
+  RTP: number = 0;
+  RTP_win: number = 0;
+  RTP_lost: number = 0;
+  RTP_winp: number = 0;
+  RTP_lostp: number = 0;
+  RTP_total: number = 0;
+  */
+/*

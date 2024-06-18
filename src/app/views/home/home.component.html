@@ -1,0 +1,223 @@
+<section class="text-gray-600 body-font">
+  <div class="container px-5 py-24 mx-auto">
+    <div class="text-center mb-10">
+      <h1 class="sm:text-3xl text-2xl font-medium text-center title-font text-zinc-200 mb-4">Test Juego Slots</h1>
+      <p class="text-base leading-relaxed xl:w-2/4 lg:w-3/4 mx-auto">Test Estadísticas, Configuraciónes, Comportamiento
+        de la Banca, Umbrales de desición, personalidad del jugador.</p>
+    </div>
+    <div class="text-center mb-4 lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+      <div class="flex w-full overflow-x-auto">
+        <table class="table">
+          <thead>
+            <tr>
+              <th>Fila</th>
+              <th>Rodillo 1</th>
+              <th>Rodillo 2</th>
+              <th>Rodillo 3</th>
+              <th>Rodillo 4</th>
+              <th>Rodillo 5</th>
+            </tr>
+          </thead>
+          <tbody>
+            <!--
+            <tr>
+              <th>1</th>
+
+              @for (item of matrix[0]; track $index) {
+                <td>Figura {{item}}</td>
+              }
+            </tr>
+            <tr>
+              <th>2</th>
+              @for (item of matrix[1]; track $index) {
+                <td>Figura {{item}}</td>
+              }
+            </tr>
+            <tr>
+              <th>3</th>
+              @for (item of matrix[2]; track $index) {
+                <td>Figura {{item}}</td>
+              }
+            </tr>
+-->
+          </tbody>
+        </table>
+      </div>
+    </div>
+    <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+
+      <div class="p-2 sm:w-1/2 w-full">
+        <div class="bg-zinc-800 rounded flex p-4 h-full items-center">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+            class="text-green-500 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+            <path d="M22 4L12 14.01l-3-3"></path>
+          </svg>
+
+          <span class="title-font font-medium text-green-500">
+            RTP: {{rtp}}%
+            <input [(ngModel)]="rtp" type="range" class="range range-success w-full" />
+          </span>
+
+        </div>
+      </div>
+
+      <div class="p-2 sm:w-1/2 w-full">
+        <div class="bg-zinc-800 rounded flex p-4 h-full items-center">
+          <svg fill="none" stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="3"
+            class="text-green-500 w-6 h-6 flex-shrink-0 mr-4" viewBox="0 0 24 24">
+            <path d="M22 11.08V12a10 10 0 11-5.93-9.14"></path>
+            <path d="M22 4L12 14.01l-3-3"></path>
+          </svg>
+
+          <span class="title-font font-medium text-green-500">
+            Volatilidad: {{volatility}} %
+            <input [(ngModel)]="volatility" type="range" class="range range-success w-full" />
+          </span>
+
+        </div>
+      </div>
+    </div>
+
+
+    <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+
+      <div class="p-2 sm:w-1/2 w-full">
+        <div class="bg-zinc-800 rounded flex p-4 h-full items-center">
+
+          <select class="select" [(ngModel)]="line">
+            @for (item of lines; track $index) {
+            <option value={{$index}}>Linea {{item}}</option>
+            }
+          </select>
+
+        </div>
+      </div>
+
+      <div class="p-2 sm:w-1/2 w-full">
+        <div class="bg-zinc-800 rounded flex p-4 h-full items-center">
+
+          <select class="select" [(ngModel)]="bet">
+            @for (item of bets; track $index) {
+            <option value="{{$index}}">{{item}}</option>
+            }
+          </select>
+
+        </div>
+      </div>
+
+    </div>
+
+
+    <button (click)="Play()"
+      class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+      Jugar
+    </button>
+
+  </div>
+
+
+  <div class="text-center mb-6 lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+    <div class="w-full overflow-x-auto">
+      <p class="text-3xl text-zinc-200 mb-2">Resultados Banca</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>RTP</th>
+            <th>W_RTP</th>
+            <th>L_RTP</th>
+            <th>T_RTP</th>
+            <th>Banca</th>
+            <th>Estado</th>
+          </tr>
+        </thead>
+        <tbody>
+          <!--
+          <tr>
+            <th>{{_RTP.value}}</th>
+            <th>{{_RTP.win}}</th>
+            <th>{{_RTP.lost}}</th>
+            <th>{{_RTP.total}}</th>
+            <td>{{balanceGame}}</td>
+            <td>
+              @switch (getBankStatus()) {
+              @case ('veryLow') {
+              <span class="badge badge-flat-error">Muy Bajo</span>
+              }
+              @case ('low') {
+              <span class="badge badge-flat-error">Bajo</span>
+              }
+              @case ('medium') {
+              <span class="badge badge-flat-warning">Medio</span>
+              }
+              @case ('high') {
+              <span class="badge badge-flat-success">Alto</span>
+              }
+              @case ('veryHigh') {
+              <span class="badge badge-flat-success">Muy Alto</span>
+              }
+              }
+            </td>
+          </tr>
+          -->
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="text-center mb-6 lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
+    <div class="w-full overflow-x-auto">
+      <p class="text-3xl text-zinc-200 mb-2">Resultados Jugador</p>
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Spin</th>
+            <th>Lineas</th>
+            <th>ValLine</th>
+            <th>LMe</th>
+            <th>LMo</th>
+            <th>LDesTip</th>
+            <th>Apuesta</th>
+            <th>Acumulado</th>
+            <th>AMe</th>
+            <th>AMo</th>
+            <th>ADesTip</th>
+            <th>Result</th>
+            <th>algoritmo</th>
+            <th>Decisor</th>
+            <th>Rnd</th>
+          </tr>
+        </thead>
+        <!--
+        @for (item of getListHistorical(); track $index) {
+        <tr>
+
+          <th class="text-white">{{item.spin}}</th>
+          <th class="text-green-500">{{item.line}}</th>
+          <th class="text-orange-400">$ {{item.valueLine}}</th>
+          <th class="text-green-700">{{item.mediaLine}}</th>
+          <th class="text-green-700">{{item.modeLine}}</th>
+          <th class="text-green-700">{{item.desTypLin}}</th>
+          <th class="text-sky-500">$ {{item.bet}}</th>
+          <th class="text-sky-500">$ {{acumulate}}</th>
+          <th class="text-sky-700">{{item.mediaBet}}</th>
+          <th class="text-sky-700">{{item.modeBet}}</th>
+          <th class="text-sky-700">{{item.desTypBet}}</th>
+          @if (item.win) { <th><span class="badge badge-flat-warning">Gana</span></th> }
+          @else { <th><span class="badge badge-flat-error">Perde</span></th> }
+          <th class="text-indigo-500">{{item.algorithm}}</th>
+          <th class="text-indigo-700">{{item.decider}}</th>
+          <th class="text-indigo-700">{{item.rnd}}</th>
+
+        </tr>
+        }
+        -->
+      </table>
+
+    </div>
+  </div>
+
+
+
+</section>
