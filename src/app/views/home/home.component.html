@@ -44,6 +44,9 @@
 
           </tbody>
         </table>
+        @if (historical[historical.length-1].winLines !== undefined) {
+          <p>WindLines:{{historical[historical.length-1].winLines?.length}}</p>
+        }
       </div>
     </div>
     <div class="flex flex-wrap lg:w-4/5 sm:mx-auto sm:mb-2 -mx-2">
