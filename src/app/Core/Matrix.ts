@@ -182,10 +182,10 @@ Devolver el arreglo de matrices: Finalmente, se devuelve el arreglo matrixes que
     estimatedProfit: number,
     bet: number
   ) => {
-    console.log("Tamo aqui")
-    console.log("estimatedProfit: ",estimatedProfit)
-    console.log("lines: ", lines)
-    console.log("bet: ", bet)
+    //console.log("Tamo aqui")
+    //console.log("estimatedProfit: ",estimatedProfit)
+    //console.log("lines: ", lines)
+    //console.log("bet: ", bet)
     while (true) {
       const matrix = this.generateMatrixes(1)[0];
       const result = this.validateMatrix(matrix, lines);

@@ -19,27 +19,29 @@
             </tr>
           </thead>
           <tbody>
-            <!--
-            <tr>
-              <th>1</th>
 
-              @for (item of matrix[0]; track $index) {
-                <td>Figura {{item}}</td>
-              }
-            </tr>
-            <tr>
-              <th>2</th>
-              @for (item of matrix[1]; track $index) {
-                <td>Figura {{item}}</td>
-              }
-            </tr>
-            <tr>
-              <th>3</th>
-              @for (item of matrix[2]; track $index) {
-                <td>Figura {{item}}</td>
-              }
-            </tr>
--->
+            @if (matrixBuffer !== []) {
+              <tr>
+                <th>1</th>
+
+                @for (item of matrixBuffer[0]; track $index) {
+                  <td>Figura {{item}}</td>
+                }
+              </tr>
+              <tr>
+                <th>2</th>
+                @for (item of matrixBuffer[1]; track $index) {
+                  <td>Figura {{item}}</td>
+                }
+              </tr>
+              <tr>
+                <th>3</th>
+                @for (item of matrixBuffer[2]; track $index) {
+                  <td>Figura {{item}}</td>
+                }
+              </tr>
+            }
+
           </tbody>
         </table>
       </div>

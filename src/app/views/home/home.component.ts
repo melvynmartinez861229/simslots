@@ -24,6 +24,8 @@ export class HomeComponent {
   bet: number = 0;
   bets: number[] = bets;
 
+  matrixBuffer:number[][] = [];
+
   constructor(){
     GameSlots.initialize();
   }
@@ -36,5 +38,7 @@ export class HomeComponent {
       volatility: this.volatility / 100,
     };
     let result: IResult = GameSlots.play(data);
+    console.log(result);
+    this.matrixBuffer = result.matrix;
   }
 }

@@ -1,5 +1,5 @@
 import { winningLines, awards, lines } from './GameSlots.Helpers';
-import { Matrix, winResult } from './Matrix';
+import { Matrix, winResult, LineResult } from './Matrix';
 
 /** Interface para el Spin */
 export interface ISpin {
@@ -22,7 +22,7 @@ export interface IResult {
   /** Matriz de simbolos */
   matrix: number[][];
   /** Lineas ganadoras */
-  winLines: number[];
+  winLines: LineResult[] | undefined;
   /** Cantidad de monedas ganadas */
   win: number;
   /** Cantidad de monedas para banca por concepto de -RTP */
@@ -73,7 +73,7 @@ export class GameSlots {
       spinNumber: this.counter,
       dataSpin,
       matrix: [],
-      winLines: [],
+      winLines: undefined,
       win: 0,
       rtp: 0,
       gameLog: undefined,
@@ -117,14 +117,17 @@ export class GameSlots {
     //si pierde: (la retencion sera del % respecto al RTP)
     //HEchale un ojo aca
     const withholdingsToWin = GameSlots.getRandomNumber(10, dataSpin.bet * 10);
-    console.log("Ramdom: " ,withholdingsToWin)
-    console.log("Before:  "+ GameSlots.withholdings)
+    //console.log("Ramdom: " ,withholdingsToWin)
+    //console.log("Before:  "+ GameSlots.withholdings)
     if ((isWin || GameSlots.withholdings > withholdingsToWin) && withholdingsResult > 0) {
-     // console.log(`Bet: ${dataSpin.bet} Rtp: ${dataSpin.rtp} total: ${withholdingsResult}`)
       let theMatrix:winResult = Matrix.getWinnerMatrix(dataSpin.lines,withholdingsResult,dataSpin.bet);
       GameSlots.withholdings -=  theMatrix.info.profit;
-      console.log("After:  "+ GameSlots.withholdings)
-      console.table(theMatrix.matrix);
+      console.log('winner Matrix respose:')
+      result.matrix = theMatrix.matrix;
+      result.winLines = theMatrix.info.lines;
+      result.win = theMatrix.info.profit;
+
+      console.table(theMatrix.matrix)
     } else {
       //Calcular el saldo en Base al RTP (retorno al jugador).
       withholdingsResult = dataSpin.bet * dataSpin.rtp;
@@ -134,6 +137,10 @@ export class GameSlots {
       GameSlots.balance += dataSpin.bet - withholdingsResult;
       //generar una Matriz perdedora
       //console.log("!!!!!!!!!!  "+ GameSlots.balance)
+      let theMatrix = Matrix.getLoserMatrix(dataSpin.lines);
+      console.log('losser Matrix respose:')
+      console.table(theMatrix);
+      result.matrix = theMatrix;
     }
 
     return result;
