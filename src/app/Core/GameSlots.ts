@@ -119,7 +119,7 @@ export class GameSlots {
     const withholdingsToWin = GameSlots.getRandomNumber(10, dataSpin.bet * 10);
     console.log("Ramdom: " ,withholdingsToWin)
     console.log("Before:  "+ GameSlots.withholdings)
-    if (isWin || GameSlots.withholdings > withholdingsToWin) {
+    if ((isWin || GameSlots.withholdings > withholdingsToWin) && withholdingsResult > 0) {
      // console.log(`Bet: ${dataSpin.bet} Rtp: ${dataSpin.rtp} total: ${withholdingsResult}`)
       let theMatrix:winResult = Matrix.getWinnerMatrix(dataSpin.lines,withholdingsResult,dataSpin.bet);
       GameSlots.withholdings -=  theMatrix.info.profit;
