@@ -28,7 +28,7 @@ export const winningLines: number[][] = [
 ];
 
 /** Premios[][] el index 0 representa la figura, el index 1 los X2,X3,X4,X5 */
-export const awards: number[][] = [
+export const listAwards: number[][] = [
   [8, 20, 80, 400],
   [0.8, 6, 40, 200],
   [0, 2, 10, 40],
@@ -45,7 +45,7 @@ export const awards: number[][] = [
 ];
 
 /** Apuestas */
-export const bets: number[] = [4, 8, 20, 40, 80, 200, 400, 800, 1600, 3200];
+export const listBets: number[] = [4, 8, 20, 40, 80, 200, 400, 800, 1600, 3200];
 
 /** Matriz vacia */
 export const emptyMatrix: number[][] = [
@@ -55,4 +55,4 @@ export const emptyMatrix: number[][] = [
 ]
 
 /** Coleccion de lineas */
-export const lines: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21];
+export const listLines: number[] = [1, 2, 3, 4, 5, 6, 7, 8, 9, 10, 11, 12, 13, 14, 15, 16, 17, 18, 19, 20, 21, 22, 23, 24, 25];

@@ -1,8 +1,6 @@
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
-import { Statistics } from '../../Core/Statistics';
-import { Matrix, LineResult, winResult } from '../../Core/Matrix';
-import { bets, lines } from '../../Core/GameSlots.Helpers';
+import { listAwards, listBets, listLines } from '../../Core/GameSlots.Helpers';
 import { GameSlots, IResult, ISpin } from '../../Core/GameSlots';
 
 @Component({
@@ -18,17 +16,34 @@ export class HomeComponent {
 
   /** Coleccion del <Option> */
   line: number = 0;
-  lines: number[] = lines;
+  lines: number[] = listLines;
 
   /** Coleccion del <Option> */
   bet: number = 0;
-  bets: number[] = bets;
+  bets: number[] = listBets;
 
   matrixBuffer:number[][] = [];
 
   historical:IResult[] = [];
 
   playerBalance:number = 0;
+
+  lastResult:IResult = {
+    spinNumber: 0,
+    dataSpin: {
+      lines: 0,
+      bet: 0,
+      rtp: 0,
+      volatility: 0
+    },
+    matrix: [],
+    winLines: undefined,
+    win: 0,
+    rtp: 0,
+    gameLog: undefined,
+    pricePerLine: 0,
+    theMatrix: undefined
+  };
 
   constructor(){
     GameSlots.initialize();
@@ -51,6 +66,10 @@ export class HomeComponent {
     {
       this.playerBalance -= data.bet;
     }
+    this.lastResult = result;
+  }
 
+  getValuePerLine(number:number,count:number):number{
+    return listAwards[number][count]
   }
 }

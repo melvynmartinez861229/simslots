@@ -112,11 +112,11 @@
       </div>
     </div>
 
+<!--
+    @if (historical[historical.length-1].winLines != undefined) {
 
-      @if (historical[historical.length-1].winLines != undefined) {
-
-      @for (item of historical[historical.length-1].winLines; track $index) {
-        <div class="flex justify-center">
+    @for (item of historical[historical.length-1].winLines; track $index) {
+    <div class="flex justify-center">
       <div class="flex">
         <p>
           <span class="badge badge-flat-success">LineID: {{item.LineID}}</span>
@@ -126,15 +126,60 @@
         </p>
       </div>
     </div>
-      }
-      }
+    }
+    }
+
+    -->
+
+    @if (lastResult.winLines?.length !== undefined) {
+      @for (item of lastResult.winLines; track $index) {
+        <div class="flex justify-center mb-4">
+          <div class="flex">
+            <p><span class="badge badge-flat-primary">Value: {{lastResult.pricePerLine}}</span></p>
+            <p><span class="badge badge-flat-success">Linea # {{item.LineID + 1}}</span></p>
+            <p><span class="badge badge-flat-secondary">Count: {{item.Count}}</span></p>
+            <p><span class="badge badge-flat-success">Figura: {{item.Number}}</span></p>
+          </div>
+        </div>
+    }
+  }
+
+<!--
     <div class="flex justify-center">
       @if ( playerBalance != undefined ) {
-        <p>
-          <span class="badge badge-flat-primary">Playerbalance: <strong>{{playerBalance}}</strong></span>
-        </p>
+      <p>
+        <span class="badge badge-flat-primary">Playerbalance: <strong>{{playerBalance}}</strong></span>
+      </p>
+      <p>
+        <span class="badge badge-flat-primary"><strong>Balance:
+            {{lastResult.gameLog?.balance}}</strong>
+        </span>
+      </p>
       }
     </div>
+    -->
+
+    <div class="w-full overflow-x-auto">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Balance</th>
+            <th>Player</th>
+            <th>Valor Línea</th>
+            <th>Premio</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>$ {{lastResult.gameLog?.balance}}</th>
+            <td>$ {{playerBalance}}</td>
+            <td>$ {{lastResult.pricePerLine}}</td>
+            <td>$ {{lastResult.theMatrix?.info?.profit}}</td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+
   </div>
 
   <!--
