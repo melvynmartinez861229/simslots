@@ -85,7 +85,7 @@ export class GameSlots {
     };
 
     // obtener el precio por linea (Apuesta entre lineas)
-    let pricePerLine = dataSpin.lines / dataSpin.bet;
+    let pricePerLine = parseFloat((dataSpin.bet / dataSpin.lines).toFixed(2));
     result.pricePerLine = pricePerLine;
 
     //estado del saldo del juego
@@ -127,6 +127,7 @@ export class GameSlots {
     //console.log("Ramdom: " ,withholdingsToWin)
     //console.log("Before:  "+ GameSlots.withholdings)
     if ((isWin || GameSlots.withholdings > withholdingsToWin) && withholdingsResult > 0) {
+
       let theMatrix:winResult = Matrix.getWinnerMatrix(dataSpin.lines,withholdingsResult,dataSpin.bet);
       result.theMatrix = theMatrix;
       GameSlots.withholdings -=  theMatrix.info.profit;
@@ -134,20 +135,26 @@ export class GameSlots {
       result.matrix = theMatrix.matrix;
       result.winLines = theMatrix.info.lines;
       result.win = theMatrix.info.profit;
+      GameSlots.balance -= theMatrix.info.profit;
+      result.gameLog.balance = GameSlots.balance;
       console.table(theMatrix.matrix)
+
     } else {
+
       //Calcular el saldo en Base al RTP (retorno al jugador).
       withholdingsResult = dataSpin.bet * dataSpin.rtp;
       //console.log(">>>>>   "+withholdingsResult);
       GameSlots.withholdings += withholdingsResult;
       //enviar la diferencia al saldo del juego.
-      GameSlots.balance += dataSpin.bet - withholdingsResult;
+      GameSlots.balance += dataSpin.bet;
+      result.gameLog.balance = GameSlots.balance;
       //generar una Matriz perdedora
       //console.log("!!!!!!!!!!  "+ GameSlots.balance)
       let theMatrix = Matrix.getLoserMatrix(dataSpin.lines);
       console.log('losser Matrix respose:')
       console.table(theMatrix);
       result.matrix = theMatrix;
+
     }
 
     return result;
