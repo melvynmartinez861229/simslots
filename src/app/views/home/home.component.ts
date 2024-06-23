@@ -1,7 +1,9 @@
+import { Spin } from './../../Core/BD';
 import { Component } from '@angular/core';
 import { FormsModule } from '@angular/forms';
 import { listAwards, listBets, listLines } from '../../Core/GameSlots.Helpers';
 import { GameSlots, IResult, ISpin } from '../../Core/GameSlots';
+import { GameSlotsController } from '../../Core/GameSlotsController';
 
 @Component({
   selector: 'app-home',
@@ -49,7 +51,13 @@ export class HomeComponent {
     GameSlots.initialize();
   }
 
+  wave:number[] = []
+
   public Play(): void {
+
+   console.log(GameSlotsController.spin())
+
+
     let data: ISpin = {
       lines: this.lines[this.line],
       bet: this.bets[this.bet],

@@ -1,0 +1,202 @@
+<section class="text-gray-600 body-font">
+
+  <div class="m-4 p-4 border rounded border-zinc-600">
+    <div class="pb-4">
+      <button (click)="play()"
+        class="flex mx-auto mt-16 text-white bg-indigo-500 border-0 py-2 px-8 focus:outline-none hover:bg-indigo-600 rounded text-lg">
+        Jugar</button>
+    </div>
+
+    <div class="flex justify-center">
+
+      <select class="select m-4" [(ngModel)]="lineSelect">
+        @for (item of lines; track $index) {
+        <option value={{item}}>Linea {{item}}</option>
+        }
+      </select>
+
+      <select class="select m-4" [(ngModel)]="betSelect">
+        @for (item of bets; track $index) {
+        <option value={{$index}}>$ {{item}}</option>
+        }
+      </select>
+
+      <div class="divider divider-vertical h-44"></div>
+
+
+    </div>
+
+    <div class="flex justify-center">
+      <p>Valor de apuesta: ${{bets[betSelect] * lineSelect}}</p>
+    </div>
+
+  </div>
+
+  <div class="flex justify-center">
+    <button class="btn btn-solid-warning">Premios</button>
+    <div class="overflow-x-auto max-w-4xl">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Figura</th>
+            <th>X2</th>
+            <th>X3</th>
+            <th>X4</th>
+            <th>X5</th>
+          </tr>
+        </thead>
+        <tbody>
+          <tr>
+            <th>Figura 1 Comodín</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+          <tr>
+            <th>Figura 2</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+          <tr>
+            <th>Figura 3</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+          <tr>
+            <th>Figura 4</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+          <tr>
+            <th>Figura 5</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+          <tr>
+            <th>Figura 6</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+          <tr>
+            <th>Figura 7</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+          <tr>
+            <th>Figura 8</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+          <tr>
+            <th>Figura 9</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+          <tr>
+            <th>Figura 10</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+          <tr>
+            <th>Figura 11</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+          <tr>
+            <th>Figura 12</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+          <tr>
+            <th>Figura 13</th>
+            <td><input class="input" placeholder="X2" /></td>
+            <td><input class="input" placeholder="X3" /></td>
+            <td><input class="input" placeholder="X4" /></td>
+            <td><input class="input" placeholder="X5" /></td>
+          </tr>
+        </tbody>
+      </table>
+    </div>
+  </div>
+
+
+  <div class="flex justify-center">
+    <table class="table  max-w-4xl">
+      <thead>
+        <tr>
+          <th>
+            <div class="skeleton h-5 rounded-md"></div>
+          </th>
+          <th>
+            <div class="skeleton h-5 rounded-md"></div>
+          </th>
+          <th>
+            <div class="skeleton h-5 rounded-md"></div>
+          </th>
+          <th>
+            <div class="skeleton h-5 rounded-md"></div>
+          </th>
+        </tr>
+      </thead>
+      <thead>
+        <tr>
+          <th>
+            <div class="skeleton h-5 rounded-md"></div>
+          </th>
+          <th>
+            <div class="skeleton h-5 rounded-md"></div>
+          </th>
+          <th>
+            <div class="skeleton h-5 rounded-md"></div>
+          </th>
+          <th>
+            <div class="skeleton h-5 rounded-md"></div>
+          </th>
+        </tr>
+      </thead>
+      <thead>
+        <tr>
+          <th>
+            <div class="skeleton h-5 rounded-md"></div>
+          </th>
+          <th>
+            <div class="skeleton h-5 rounded-md"></div>
+          </th>
+          <th>
+            <div class="skeleton h-5 rounded-md"></div>
+          </th>
+          <th>
+            <div class="skeleton h-5 rounded-md"></div>
+          </th>
+        </tr>
+      </thead>
+    </table>
+  </div>
+  <div>
+
+  </div>
+
+</section>
