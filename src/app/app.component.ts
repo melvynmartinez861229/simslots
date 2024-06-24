@@ -30,6 +30,18 @@ export class AppComponent {
     factors: undefined,
   };
 
+  constructor(){
+    GameSlots.SetUp();
+  }
+
+  ResetGame(){
+    GameSlots.SetUp();
+  }
+
+
+  getBalanceGame():number{
+    return GameSlots.Balance;
+  }
 
   incrementbalance(n:number){
     this.BalancePlayer += n;

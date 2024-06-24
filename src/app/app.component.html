@@ -2,11 +2,11 @@
 
   <div class="flex mb-3">
     <div class="mr-2">
-      <p class="text-2xl">Balance del Juego: <span class="badge badge-outline-success badge-lg w-32"> $ {{BalancePlayer}} </span> </p>
+      <p class="text-2xl">Balance del Juego: <span class="badge badge-outline-success badge-lg w-32"> $ {{getBalanceGame()}} </span> </p>
     </div>
 
     <div class="ml-6">
-      <button class="btn btn-outline-secondary mr-2" (click)="incrementbalance(50)">Reset</button>
+      <button class="btn btn-outline-secondary mr-2" (click)="ResetGame()">Reset</button>
     </div>
   </div>
 

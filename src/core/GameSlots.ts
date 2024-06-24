@@ -8,6 +8,11 @@ export class GameSlots {
   ];
   public static Bets: number[] = [0.01, 0.05, 0.1, 0.25, 0.5, 1.0];
 
+
+  public static SetUp(){
+    GameSlots.Balance = GameSlots.InitialBalance;
+  }
+
   public static Spin(lineSelect:number, betSelect:number) {
 
   }
