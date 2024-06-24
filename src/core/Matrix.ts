@@ -1,6 +1,10 @@
 import { Helpers } from './Helpers';
 
 export interface IMatrixResult {
+  id:number | undefined;
+  lines:number | undefined;
+  bet:number | undefined;
+  cost:number | undefined;
   matrix: number[][];
   evaluation: IMatrixEvaluationResult | undefined;
   winner: boolean | undefined;
@@ -145,6 +149,7 @@ export class Matrix {
   public static GenerateWinnerExpectation(_lines:number):IMatrixResult {
 
     let result:IMatrixResult = {
+      id: 0,
       matrix: [],
       evaluation: {
         totalLines: 0,
@@ -156,7 +161,10 @@ export class Matrix {
       linesWinner: undefined,
       mapLines: [],
       cardsWinner: undefined,
-      factors: undefined
+      factors: undefined,
+      lines: undefined,
+      bet: undefined,
+      cost: undefined
     }
 
     //Obtener los indices figuras que con X2 esten por encima de 0 y debajo de el valor de espectativa
@@ -201,22 +209,23 @@ export class Matrix {
       result.matrix[i][1] = rolling_1[i]
     }
 
-    //insertar la carta ganadora con la linea gnadora en X2
-    result.matrix[lineWinner[0]][0] = cardWinner;
-    result.matrix[lineWinner[1]][1] = cardWinner;
 
-    console.table(result.matrix);
+    //console.table(result.matrix);
 
     //Agregar de 0 - 2 scatter!
     let cantScatter = Helpers.randomRange(0, 2);
       if (cantScatter > 0) {
-        let indexScatter = 2;
+        let indexScatter = Helpers.randomRange(0, 2);
         for (let i = 0; i < cantScatter; i++) {
           result.matrix[Helpers.randomRange(0, 2)][indexScatter] =
             Helpers.Scatter;
           indexScatter += Helpers.randomRange(1, 2);
         }
     }
+
+    //insertar la carta ganadora con la linea gnadora en X2
+    result.matrix[lineWinner[0]][0] = cardWinner;
+    result.matrix[lineWinner[1]][1] = cardWinner;
 
     //agregar los factors
     result.factors = [Helpers.CardMultiplier[cardWinner-1][1]];
@@ -241,14 +250,18 @@ export class Matrix {
     cant = (cant>5)?5:cant;
 
     let result:IMatrixResult = {
-      matrix: this.GenerateLoser(false,false).matrix,
+      id: 0,
+      matrix: this.GenerateLoser(false, false).matrix,
       evaluation: undefined,
       winner: true,
       winnerScatter: true,
       linesWinner: [],
       mapLines: [],
       cardsWinner: [],
-      factors: []
+      factors: [],
+      lines: undefined,
+      bet: undefined,
+      cost: undefined
     }
     let positions:number[] = this.shuffleCards([0,1,2,3,4]);
     for (let i = 0; i < cant; i++) {
@@ -260,6 +273,7 @@ export class Matrix {
 
   public static GenerateWinner(_lines:number, amount:number):IMatrixResult{
     let result:IMatrixResult = {
+      id: 0,
       matrix: [],
       evaluation: undefined,
       winner: undefined,
@@ -267,7 +281,10 @@ export class Matrix {
       linesWinner: undefined,
       mapLines: [],
       cardsWinner: undefined,
-      factors: undefined
+      factors: undefined,
+      lines: undefined,
+      bet: undefined,
+      cost: undefined
     }
 
     return result;
@@ -282,6 +299,7 @@ export class Matrix {
    */
   public static GenerateLoser(_inserJoker: boolean, _insertScatter: boolean):IMatrixResult {
     let result: IMatrixResult = {
+      id: 0,
       matrix: [...Helpers.MatrixCleaner],
       evaluation: undefined,
       winner: false,
@@ -289,7 +307,10 @@ export class Matrix {
       linesWinner: [],
       mapLines: [],
       factors: [],
-      cardsWinner: []
+      cardsWinner: [],
+      lines: undefined,
+      bet: undefined,
+      cost: undefined
     };
 
     // Primer pase

@@ -1,3 +1,4 @@
+import { FakePlayer } from './../core/FakePlayer';
 import { IMatrixResult, Matrix } from './../core/Matrix';
 import { FormsModule } from '@angular/forms';
 import { Component } from '@angular/core';
@@ -12,14 +13,15 @@ import { GameSlots } from '../core/GameSlots';
 })
 export class AppComponent {
 
-
-  BalancePlayer:number = 100;
-
+  balancePlayer:number = 100;
   lineNumber:number = 1;
   betNumber:number = 0.01;
   valueBet:number = 0.01;
 
+  historial:IMatrixResult[] = [];
+
   lastSpin:IMatrixResult = {
+    id: 0,
     matrix: [],
     evaluation: undefined,
     winner: undefined,
@@ -28,6 +30,9 @@ export class AppComponent {
     mapLines: undefined,
     cardsWinner: undefined,
     factors: undefined,
+    lines: undefined,
+    bet: undefined,
+    cost: undefined
   };
 
   constructor(){
@@ -44,13 +49,7 @@ export class AppComponent {
   }
 
   incrementbalance(n:number){
-    this.BalancePlayer += n;
-    if (this.BalancePlayer < 0) {
-      this.BalancePlayer = 0;
-    }
-    if (this.BalancePlayer > 500) {
-      this.BalancePlayer = 500;
-    }
+    this.balancePlayer += n;
   }
 
   onOptionSelected(event: any){
@@ -60,15 +59,8 @@ export class AppComponent {
   spinGame(){
     console.log('lineNumber',this.lineNumber);
     console.log('betNumber', this.betNumber);
-  }
-
-  get():void {
-    //let result:IMatrixResult = Matrix.GenerateLoser(true,true);
-    let result:IMatrixResult = Matrix.GenerateWinnerExpectation(5);
-    //let result:IMatrixResult = Matrix.GenerateScatter(3);
-    console.log(result);
-    console.table(result.matrix);
-    this.lastSpin = result;
+    let result:IMatrixResult = GameSlots.Spin(this.lineNumber, this.betNumber);
+    this.historial.unshift(result);
   }
 
   getLinesOption():number[]{

@@ -1,3 +1,5 @@
+import { IMatrixResult } from "./Matrix";
+
 export class GameSlots {
   public static InitialBalance: number = 100;
   public static Balance: number;
@@ -13,7 +15,29 @@ export class GameSlots {
     GameSlots.Balance = GameSlots.InitialBalance;
   }
 
-  public static Spin(lineSelect:number, betSelect:number) {
+  public static counter = 0;
 
+  public static Spin(lineSelect:number, betSelect:number):IMatrixResult {
+    let result:IMatrixResult = {
+      id: 0,
+      matrix: [],
+      evaluation: undefined,
+      winner: undefined,
+      winnerScatter: undefined,
+      linesWinner: undefined,
+      mapLines: undefined,
+      cardsWinner: undefined,
+      factors: undefined,
+      lines: lineSelect,
+      bet: betSelect,
+      cost: parseFloat((lineSelect * betSelect).toFixed(2))
+    }
+
+    result.id = this.counter;
+    this.counter++;
+
+    return result;
   }
+
+
 }

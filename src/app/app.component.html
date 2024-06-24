@@ -2,7 +2,8 @@
 
   <div class="flex mb-3">
     <div class="mr-2">
-      <p class="text-2xl">Balance del Juego: <span class="badge badge-outline-success badge-lg w-32"> $ {{getBalanceGame()}} </span> </p>
+      <p class="text-2xl">Balance del Juego: <span class="badge badge-outline-success badge-lg w-32"> $
+          {{getBalanceGame()}} </span> </p>
     </div>
 
     <div class="ml-6">
@@ -12,7 +13,15 @@
 
   <div class="flex mb-3">
     <div class="mr-2">
-      <p class="text-2xl">Saldo del Jugador: <span class="badge badge-outline-success badge-lg w-32"> $ {{BalancePlayer}} </span> </p>
+      <p class="text-2xl">Saldo del Jugador:
+        @if (balancePlayer <= 10 && balancePlayer> 0) {
+          <span class="badge badge-outline-warning badge-lg w-32"> $ {{balancePlayer}} </span>
+          }@else if (balancePlayer <= 0) { <span class="badge badge-outline-error badge-lg w-32"> $ {{balancePlayer}}
+            </span>
+            }@else {
+            <span class="badge badge-outline-success badge-lg w-32"> $ {{balancePlayer}} </span>
+            }
+      </p>
     </div>
 
     <div class="ml-6">
@@ -72,37 +81,36 @@
             <th>{{$index}}</th>
             @for (columna of fila; track $index) {
             @if (columna == 0) {
-            <td class="bg-yellow-500"><strong class="text-black">{{columna}} Scatter!</strong></td>
+            <td class="bg-yellow-500 border"><strong class="text-black">{{columna}} Scatter!</strong></td>
             }@else if(columna == 1){
-            <td class="bg-green-600"><strong class="text-black">{{columna}} Joker!</strong></td>
+            <td class="bg-green-600 border"><strong class="text-black">{{columna}} Joker!</strong></td>
             }@else if(columna == 2){
-            <td class="bg-purple-900"><strong class="text-black">{{columna}}</strong></td>
+            <td class="bg-purple-900 border"><strong class="text-black">{{columna}}</strong></td>
             }@else if(columna == 3){
-            <td class="bg-purple-700"><strong class="text-black">{{columna}}</strong></td>
+            <td class="bg-purple-700 border"><strong class="text-black">{{columna}}</strong></td>
             }@else if(columna == 4){
-            <td class="bg-purple-500"><strong class="text-black">{{columna}}</strong></td>
+            <td class="bg-purple-500 border"><strong class="text-black">{{columna}}</strong></td>
             }@else if(columna == 5){
-            <td class="bg-orange-500"><strong class="text-black">{{columna}}</strong></td>
+            <td class="bg-orange-500 border"><strong class="text-black">{{columna}}</strong></td>
             }@else if(columna == 6){
-            <td class="bg-orange-700"><strong class="text-black">{{columna}}</strong></td>
+            <td class="bg-orange-700 border"><strong class="text-black">{{columna}}</strong></td>
             }@else if(columna == 7){
-            <td class="bg-orange-900"><strong class="text-black">{{columna}}</strong></td>
+            <td class="bg-orange-900 border"><strong class="text-black">{{columna}}</strong></td>
             }@else if(columna == 8){
-            <td class="bg-emerald-900"><strong class="text-black">{{columna}}</strong></td>
+            <td class="bg-emerald-900 border"><strong class="text-black">{{columna}}</strong></td>
             }@else if(columna == 9){
-            <td class="bg-emerald-700"><strong class="text-black">{{columna}}</strong></td>
+            <td class="bg-emerald-700 border"><strong class="text-black">{{columna}}</strong></td>
             }@else if(columna == 10){
-            <td class="bg-emerald-600"><strong class="text-black">{{columna}}</strong></td>
+            <td class="bg-emerald-600 border"><strong class="text-black">{{columna}}</strong></td>
             }@else if (columna == 11) {
-            <td class="bg-yellow-700"><strong class="text-black">{{columna}}</strong></td>
+            <td class="bg-yellow-700 border"><strong class="text-black">{{columna}}</strong></td>
             }@else if (columna == 12) {
-            <td class="bg-yellow-900"><strong class="text-black">{{columna}}</strong></td>
+            <td class="bg-yellow-900 border"><strong class="text-black">{{columna}}</strong></td>
             }@else if (columna == 13) {
-            <td class="bg-red-600"><strong class="text-black">{{columna}}</strong></td>
+            <td class="bg-red-600 border"><strong class="text-black">{{columna}}</strong></td>
             }@else {
             <td>{{columna}}</td>
             }
-
             }
           </tr>
           }
@@ -155,4 +163,46 @@
 
   </div>
   }
+
+
+
+  <table class="table">
+    <thead>
+      <tr>
+        <th>Spin</th>
+        <th>Log</th>
+        <th>Lineas</th>
+        <th>Apuesta</th>
+        <th>Costo</th>
+        <th>Ganador</th>
+        <th>Figuras</th>
+        <th>Factor</th>
+      </tr>
+    </thead>
+    <tbody class="text-black">
+      @for (fila of historial; track $index) {
+      <tr class="text-center">
+        <td>
+          {{fila.id}}
+        </td>
+        <td>
+          success
+        </td>
+        <td>
+          {{fila.lines}}
+        </td>
+        <td>
+          {{fila.bet}}
+        </td>
+        <td>
+          <span class="badge badge-outline-warning">$ {{fila.cost}}</span>
+        </td>
+
+
+
+      </tr>
+      }
+    </tbody>
+  </table>
+
 </section>
