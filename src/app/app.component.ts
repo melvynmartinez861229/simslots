@@ -12,9 +12,12 @@ import { GameSlots } from '../core/GameSlots';
 })
 export class AppComponent {
 
+
+  BalancePlayer:number = 100;
+
   lineNumber:number = 1;
   betNumber:number = 0.01;
-  valuePerLine:number = 0.01;
+  valueBet:number = 0.01;
 
   lastSpin:IMatrixResult = {
     matrix: [],
@@ -28,8 +31,18 @@ export class AppComponent {
   };
 
 
+  incrementbalance(n:number){
+    this.BalancePlayer += n;
+    if (this.BalancePlayer < 0) {
+      this.BalancePlayer = 0;
+    }
+    if (this.BalancePlayer > 500) {
+      this.BalancePlayer = 500;
+    }
+  }
+
   onOptionSelected(event: any){
-    this.valuePerLine = parseFloat((this.lineNumber * this.betNumber).toFixed(2));
+    this.valueBet = parseFloat((this.lineNumber * this.betNumber).toFixed(2));
   }
 
   spinGame(){

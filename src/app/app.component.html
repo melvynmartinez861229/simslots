@@ -2,6 +2,27 @@
 
   <div class="flex mb-3">
     <div class="mr-2">
+      <p class="text-2xl">Balance del Juego: <span class="badge badge-outline-success badge-lg w-32"> $ {{BalancePlayer}} </span> </p>
+    </div>
+
+    <div class="ml-6">
+      <button class="btn btn-outline-secondary mr-2" (click)="incrementbalance(50)">Reset</button>
+    </div>
+  </div>
+
+  <div class="flex mb-3">
+    <div class="mr-2">
+      <p class="text-2xl">Saldo del Jugador: <span class="badge badge-outline-success badge-lg w-32"> $ {{BalancePlayer}} </span> </p>
+    </div>
+
+    <div class="ml-6">
+      <button class="btn btn-outline-secondary mr-2" (click)="incrementbalance(50)">+</button>
+      <button class="btn btn-outline-secondary" (click)="incrementbalance(-50)">-</button>
+    </div>
+  </div>
+
+  <div class="flex mb-3">
+    <div class="mr-2">
       <select class="select w-32" [(ngModel)]="lineNumber" (change)="onOptionSelected($event)">
         @for (line of getLinesOption(); track $index) {
         <option value="{{line}}">Linea {{line}}</option>
@@ -15,8 +36,9 @@
         }
       </select>
     </div>
+
     <div class="mr-2">
-      <p class="text-2xl">Valor por Línea: <span class="badge badge-outline-primary badge-lg"> $ {{valuePerLine}} </span></p>
+      <p class="text-2xl">Valor de Spin: <span class="badge badge-outline-warning badge-lg"> $ {{valueBet}} </span></p>
     </div>
   </div>
 
@@ -29,8 +51,6 @@
     <button class="btn btn-outline" (click)="SpinScatter(4)">Spin Scatter 4!</button>
     <button class="btn btn-outline" (click)="SpinScatter(5)">Spin Scatter 5!</button>
   </div>
-
-
 
   @if (lastSpin.matrix.length > 0) {
   <div class="my-4 flex">

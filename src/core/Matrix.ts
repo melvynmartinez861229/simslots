@@ -69,7 +69,6 @@ export class Matrix {
             break;
           }
         }
-
       }
 
       if (winner) {
