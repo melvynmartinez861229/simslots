@@ -1,3 +1,138 @@
-<section>
-  <button class="btn" (click)="get()">Default</button>
+<section class="p-5 m-5">
+
+  <div class="flex mb-3">
+    <div class="mr-2">
+      <select class="select w-32" [(ngModel)]="lineNumber" (change)="onOptionSelected($event)">
+        @for (line of getLinesOption(); track $index) {
+        <option value="{{line}}">Linea {{line}}</option>
+        }
+      </select>
+    </div>
+    <div class="mr-2">
+      <select class="select w-32" [(ngModel)]="betNumber" (change)="onOptionSelected($event)">
+        @for (bet of getBetsOption(); track $index) {
+        <option value="{{bet}}">$ {{bet}}</option>
+        }
+      </select>
+    </div>
+    <div class="mr-2">
+      <p class="text-2xl">Valor por Línea: <span class="badge badge-outline-primary badge-lg"> $ {{valuePerLine}} </span></p>
+    </div>
+  </div>
+
+  <div class="btn-group btn-group-rounded btn-group-scrollable mb-2">
+    <button class="btn btn-outline-warning" (click)="spinGame()">Spin</button>
+    <button class="btn btn-outline" (click)="SpinDopamina()">Spin con Dopamina</button>
+    <button class="btn btn-outline" (click)="SpinPerdedor()">Spin Perdedor</button>
+    <button class="btn btn-outline">Spin Ganador</button>
+    <button class="btn btn-outline" (click)="SpinScatter(3)">Spin Scatter 3!</button>
+    <button class="btn btn-outline" (click)="SpinScatter(4)">Spin Scatter 4!</button>
+    <button class="btn btn-outline" (click)="SpinScatter(5)">Spin Scatter 5!</button>
+  </div>
+
+
+
+  @if (lastSpin.matrix.length > 0) {
+  <div class="my-4 flex">
+    <div class="flex w-full overflow-x-auto">
+      <table class="table">
+        <thead>
+          <tr>
+            <th>Fila</th>
+            <th>Rodillo 1</th>
+            <th>Rodillo 2</th>
+            <th>Rodillo 3</th>
+            <th>Rodillo 4</th>
+            <th>Rodillo 5</th>
+          </tr>
+        </thead>
+        <tbody class="text-black">
+          @for (fila of lastSpin.matrix; track $index) {
+          <tr class="text-center">
+            <th>{{$index}}</th>
+            @for (columna of fila; track $index) {
+            @if (columna == 0) {
+            <td class="bg-yellow-500"><strong class="text-black">{{columna}} Scatter!</strong></td>
+            }@else if(columna == 1){
+            <td class="bg-green-600"><strong class="text-black">{{columna}} Joker!</strong></td>
+            }@else if(columna == 2){
+            <td class="bg-purple-900"><strong class="text-black">{{columna}}</strong></td>
+            }@else if(columna == 3){
+            <td class="bg-purple-700"><strong class="text-black">{{columna}}</strong></td>
+            }@else if(columna == 4){
+            <td class="bg-purple-500"><strong class="text-black">{{columna}}</strong></td>
+            }@else if(columna == 5){
+            <td class="bg-orange-500"><strong class="text-black">{{columna}}</strong></td>
+            }@else if(columna == 6){
+            <td class="bg-orange-700"><strong class="text-black">{{columna}}</strong></td>
+            }@else if(columna == 7){
+            <td class="bg-orange-900"><strong class="text-black">{{columna}}</strong></td>
+            }@else if(columna == 8){
+            <td class="bg-emerald-900"><strong class="text-black">{{columna}}</strong></td>
+            }@else if(columna == 9){
+            <td class="bg-emerald-700"><strong class="text-black">{{columna}}</strong></td>
+            }@else if(columna == 10){
+            <td class="bg-emerald-600"><strong class="text-black">{{columna}}</strong></td>
+            }@else if (columna == 11) {
+            <td class="bg-yellow-700"><strong class="text-black">{{columna}}</strong></td>
+            }@else if (columna == 12) {
+            <td class="bg-yellow-900"><strong class="text-black">{{columna}}</strong></td>
+            }@else if (columna == 13) {
+            <td class="bg-red-600"><strong class="text-black">{{columna}}</strong></td>
+            }@else {
+            <td>{{columna}}</td>
+            }
+
+            }
+          </tr>
+          }
+        </tbody>
+      </table>
+    </div>
+
+    <div class="divider divider-vertical h-44"></div>
+    <div class="w-2/3">
+      @if (lastSpin.winner === false) {
+      <p>Ganador: <span class="badge badge-outline-error">{{lastSpin.winner}}</span></p>
+      }@else {
+
+      <p>Ganador?: <span class="badge badge-outline-warning">{{lastSpin.winner}}</span></p>
+      <p>Scatter?:
+        @if (lastSpin.winnerScatter) {
+        <span class="badge badge-outline-warning">{{lastSpin.winnerScatter}}</span>
+        }@else {
+        <span class="badge badge-outline">{{lastSpin.winnerScatter}}</span>
+        }
+
+      </p>
+
+      <p>Lineas ganadoras: {{lastSpin.evaluation?.totalLines}}<br>
+        Lineas:
+        @for (linea of lastSpin.evaluation?.data; track $index) {
+        <span class="badge badge-outline">{{linea.lineID}}</span>
+        }
+      </p>
+
+      <p>Mapa de Lineas:
+        @for (mapa of lastSpin.evaluation?.data; track $index) {
+        <span class="badge badge-outline">{{mapa.mapLine}}</span>
+        }
+      </p>
+
+      <div class="flex">
+        @for (evaluation of lastSpin.evaluation?.data; track $index) {
+        <p class="outline-1 outline-dotted outline-zinc-600 m-2 p-2">
+          Carta: <span class="badge badge-outline-warning">{{evaluation.card}}</span><br>
+          X{{evaluation.Xs}}<br>
+          Factor: {{evaluation.factor}}<br>
+        </p>
+        }
+      </div>
+
+      }
+
+    </div>
+
+  </div>
+  }
 </section>
