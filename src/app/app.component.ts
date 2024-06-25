@@ -6,6 +6,16 @@ import { RouterOutlet } from '@angular/router';
 import { GameSlots } from '../core/GameSlots';
 
 
+export interface IHistorial {
+  id: number;
+  log: string;
+  lines: number;
+  bet: number;
+  cost: number;
+  complete:boolean;
+  message:string;
+}
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -19,7 +29,9 @@ export class AppComponent {
   betNumber:number = 0.01;
   valueBet:number = 0.01;
 
-  historial:IMatrixResult[] = [];
+  //historial:IMatrixResult[] = [];
+  historial:IHistorial[] = [];
+  minHistorial:IHistorial[] = [];
 
   lastSpin:IMatrixResult = {
     id: 0,
@@ -35,7 +47,8 @@ export class AppComponent {
     bet: undefined,
     cost: undefined,
     complete: false,
-    message: ''
+    message: '',
+    algorithm: 0
   };
 
   constructor(){
@@ -44,6 +57,8 @@ export class AppComponent {
 
   ResetGame(){
     GameSlots.SetUp();
+    //this.historial = [];
+    this.historial = [];
   }
 
 
@@ -69,11 +84,30 @@ export class AppComponent {
   }
 
   spinGame(){
-    //console.log('lineNumber',this.lineNumber);
-    //console.log('betNumber', this.betNumber);
-    let result:IMatrixResult = GameSlots.Spin(this.lineNumber, this.betNumber);
-    console.log(result);
-    this.historial.unshift(result);
+    FakePlayer.line = this.lineNumber;
+    FakePlayer.bet = this.betNumber;
+    let result:IMatrixResult = GameSlots.SPIN();
+    //console.log(result);
+    let history:IHistorial = {
+      id: this.historial.length + 1,
+      message: result.message,
+      lines: 0,
+      bet: 0,
+      cost: 0,
+      complete: result.complete,
+      log: ''
+    }
+
+    if (result.lines !== undefined && result.bet !== undefined && result.cost !== undefined) {
+      history.lines = result.lines;
+      history.bet = result.bet;
+      history.cost = result.cost;
+    }
+
+    this.lastSpin = result;
+    this.balancePlayer = FakePlayer.GetBalance();
+    this.historial.unshift(history);
+
   }
 
   getLinesOption():number[]{
@@ -86,19 +120,19 @@ export class AppComponent {
 
   SpinDopamina(){
     let result:IMatrixResult = Matrix.GenerateWinnerExpectation(24);
-    console.log(result);
+    //console.log(result);
     this.lastSpin = result;
   }
 
   SpinScatter(n:number){
     let result:IMatrixResult = Matrix.GenerateScatter(n);
-    console.log(result);
+    //console.log(result);
     this.lastSpin = result;
   }
 
   SpinPerdedor(){
     let result:IMatrixResult = Matrix.GenerateLoser(true,true);
-    console.log(result);
+    //console.log(result);
     this.lastSpin = result;
   }
 }

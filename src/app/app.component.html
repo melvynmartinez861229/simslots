@@ -164,8 +164,6 @@
   </div>
   }
 
-
-
   <table class="table">
     <thead>
       <tr>
@@ -186,12 +184,13 @@
           {{fila.id}}
         </td>
         <td>
-          @if (!fila.complete) {
+          @if (fila.message == "Dopamine") {
+            <span class="badge badge-outline-warning">{{fila.message}}!!</span>
+          }@else {
             <span class="badge badge-outline-error">{{fila.message}}!!</span>
-          }@else
-          {
-            <span class="badge badge-outline-success">success</span>
           }
+
+
 
         </td>
         <td>
@@ -203,8 +202,6 @@
         <td>
           <span class="badge badge-outline-warning">$ {{fila.cost}}</span>
         </td>
-
-
 
       </tr>
       }

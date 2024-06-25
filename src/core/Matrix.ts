@@ -14,7 +14,8 @@ export interface IMatrixResult {
   cardsWinner: number[] | undefined;
   factors: number[] | undefined;
   complete:boolean;
-  message:string
+  message:string;
+  algorithm:number;
 }
 
 export interface ILineWinner {
@@ -78,6 +79,7 @@ export class Matrix {
       }
 
       if (winner) {
+        ////console.log(Helpers.CardMultiplier[card-1][x-1])
         let lineWinner:ILineWinner = {
           lineID: mapLineCounter,
           card: card,
@@ -168,7 +170,8 @@ export class Matrix {
       bet: undefined,
       cost: undefined,
       complete: false,
-      message: ''
+      message: '',
+      algorithm: 0
     }
 
     //Obtener los indices figuras que con X2 esten por encima de 0 y debajo de el valor de espectativa
@@ -178,29 +181,29 @@ export class Matrix {
         collection.push(i);
       }
     }
-    //console.log('coleccion de 0.n',collection);
+    ////console.log('coleccion de 0.n',collection);
 
     //seleccionar una carta ganadora
     const cardWinner = (collection[Helpers.randomRange(0, collection.length - 2)]) + 2;
-    //console.log('Figura ganadora', cardWinner);
+    ////console.log('Figura ganadora', cardWinner);
 
     //seleccionar una linea ganadora
     const lineID:number = Helpers.randomRange(0, _lines);
     const lineWinner:number[] = Helpers.LinesPositions[lineID];
     result.mapLines?.push(lineWinner);
-    //console.log('linea ID', lineID);
-    //console.log('Linea ganadora', lineWinner);
+    ////console.log('linea ID', lineID);
+    ////console.log('Linea ganadora', lineWinner);
 
     //Conformar coleccion perdedora
     let collectionMatrix = [...Helpers.Cards]
 
     //quitar la carta ganadora de la coleccion
     collectionMatrix = this.removeValuesFromB(collectionMatrix, [cardWinner])
-    console.log('coleccion matrix', collectionMatrix);
+    //console.log('coleccion matrix', collectionMatrix);
 
     //barajar la coleccion
     collectionMatrix = this.shuffleCards(collectionMatrix);
-    console.log('coleccion matrix barajada', collectionMatrix);
+    //console.log('coleccion matrix barajada', collectionMatrix);
 
     //rodillos 0 y 1
     let rolling_0 = collectionMatrix.splice(0, 3);
@@ -267,7 +270,8 @@ export class Matrix {
       bet: undefined,
       cost: undefined,
       complete: false,
-      message: ''
+      message: '',
+      algorithm: 0
     }
     let positions:number[] = this.shuffleCards([0,1,2,3,4]);
     for (let i = 0; i < cant; i++) {
@@ -292,7 +296,8 @@ export class Matrix {
       bet: undefined,
       cost: undefined,
       complete: false,
-      message: ''
+      message: '',
+      algorithm: 0
     }
 
     return result;
@@ -320,7 +325,8 @@ export class Matrix {
       bet: undefined,
       cost: undefined,
       complete: false,
-      message: ''
+      message: '',
+      algorithm: 0
     };
 
     // Primer pase
