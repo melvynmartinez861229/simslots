@@ -13,6 +13,8 @@ export interface IMatrixResult {
   mapLines:number[][] | undefined;
   cardsWinner: number[] | undefined;
   factors: number[] | undefined;
+  complete:boolean;
+  message:string
 }
 
 export interface ILineWinner {
@@ -164,7 +166,9 @@ export class Matrix {
       factors: undefined,
       lines: undefined,
       bet: undefined,
-      cost: undefined
+      cost: undefined,
+      complete: false,
+      message: ''
     }
 
     //Obtener los indices figuras que con X2 esten por encima de 0 y debajo de el valor de espectativa
@@ -261,7 +265,9 @@ export class Matrix {
       factors: [],
       lines: undefined,
       bet: undefined,
-      cost: undefined
+      cost: undefined,
+      complete: false,
+      message: ''
     }
     let positions:number[] = this.shuffleCards([0,1,2,3,4]);
     for (let i = 0; i < cant; i++) {
@@ -284,7 +290,9 @@ export class Matrix {
       factors: undefined,
       lines: undefined,
       bet: undefined,
-      cost: undefined
+      cost: undefined,
+      complete: false,
+      message: ''
     }
 
     return result;
@@ -310,7 +318,9 @@ export class Matrix {
       cardsWinner: [],
       lines: undefined,
       bet: undefined,
-      cost: undefined
+      cost: undefined,
+      complete: false,
+      message: ''
     };
 
     // Primer pase

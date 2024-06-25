@@ -6,4 +6,8 @@ export class FakePlayer {
     this.Balance += _balance;
   }
 
+  public static GetBalance():number{
+    return this.Balance;
+  }
+
 }

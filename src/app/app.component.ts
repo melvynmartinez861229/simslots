@@ -5,6 +5,7 @@ import { Component } from '@angular/core';
 import { RouterOutlet } from '@angular/router';
 import { GameSlots } from '../core/GameSlots';
 
+
 @Component({
   selector: 'app-root',
   standalone: true,
@@ -13,7 +14,7 @@ import { GameSlots } from '../core/GameSlots';
 })
 export class AppComponent {
 
-  balancePlayer:number = 100;
+  balancePlayer:number = FakePlayer.Balance;
   lineNumber:number = 1;
   betNumber:number = 0.01;
   valueBet:number = 0.01;
@@ -32,7 +33,9 @@ export class AppComponent {
     factors: undefined,
     lines: undefined,
     bet: undefined,
-    cost: undefined
+    cost: undefined,
+    complete: false,
+    message: ''
   };
 
   constructor(){
@@ -43,6 +46,15 @@ export class AppComponent {
     GameSlots.SetUp();
   }
 
+
+  getBalancePlayer():number{
+   return FakePlayer.GetBalance();
+  }
+
+  setBalancePlayer(n:number){
+    FakePlayer.SetBalance(n);
+    this.balancePlayer = FakePlayer.GetBalance();
+  }
 
   getBalanceGame():number{
     return GameSlots.Balance;
@@ -57,9 +69,10 @@ export class AppComponent {
   }
 
   spinGame(){
-    console.log('lineNumber',this.lineNumber);
-    console.log('betNumber', this.betNumber);
+    //console.log('lineNumber',this.lineNumber);
+    //console.log('betNumber', this.betNumber);
     let result:IMatrixResult = GameSlots.Spin(this.lineNumber, this.betNumber);
+    console.log(result);
     this.historial.unshift(result);
   }
 

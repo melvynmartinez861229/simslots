@@ -25,8 +25,8 @@
     </div>
 
     <div class="ml-6">
-      <button class="btn btn-outline-secondary mr-2" (click)="incrementbalance(50)">+</button>
-      <button class="btn btn-outline-secondary" (click)="incrementbalance(-50)">-</button>
+      <button class="btn btn-outline-secondary mr-2" (click)="setBalancePlayer(50)">+</button>
+      <button class="btn btn-outline-secondary" (click)="setBalancePlayer(-50)">-</button>
     </div>
   </div>
 
@@ -186,7 +186,13 @@
           {{fila.id}}
         </td>
         <td>
-          success
+          @if (!fila.complete) {
+            <span class="badge badge-outline-error">{{fila.message}}!!</span>
+          }@else
+          {
+            <span class="badge badge-outline-success">success</span>
+          }
+
         </td>
         <td>
           {{fila.lines}}

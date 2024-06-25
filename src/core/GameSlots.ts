@@ -1,3 +1,4 @@
+import { FakePlayer } from "./FakePlayer";
 import { IMatrixResult } from "./Matrix";
 
 export class GameSlots {
@@ -30,12 +31,23 @@ export class GameSlots {
       factors: undefined,
       lines: lineSelect,
       bet: betSelect,
-      cost: parseFloat((lineSelect * betSelect).toFixed(2))
+      cost: parseFloat((lineSelect * betSelect).toFixed(2)),
+      complete: false,
+      message: ""
     }
+
+
+    if (result.cost !== undefined && FakePlayer.Balance < result.cost) {
+      result.complete = false;
+      result.message = "Saldo Insuficiente";
+      return result;
+    }
+
 
     result.id = this.counter;
     this.counter++;
 
+    result.complete = true;
     return result;
   }
 
